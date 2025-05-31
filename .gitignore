@@ -88,4 +88,22 @@ temp/
 
 # Cursor/AI specific
 .cursor/
-.ai/ 
+.ai/
+
+# Development backups (keep local only)
+src/*.backup*
+src/index-*.ts
+*.backup-*
+
+# Test files (if any)
+test-server.js
+# Handoff and Summary Files
+COMPLETION_SUMMARY.md
+MAINNET-HANDOFF-20250530.md
+MAINNET-HANDOFF-SESSION2-20250530.md
+NEXT-SESSION-CONTEXT.md
+# Status and Troubleshooting Reports
+STATUS-REPORT-20250530-PRE-TIER1.md
+STATUS-REPORT-20250530-TIER1-COMPLETE.md
+2025-05-28_17-39-git-init-error-troubleshooting.md
+.specstory/history

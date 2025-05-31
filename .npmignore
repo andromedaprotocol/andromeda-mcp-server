@@ -1,0 +1,33 @@
+# Development files
+.git
+.gitignore
+.DS_Store
+*.log
+*.md
+!README.md
+
+# Build artifacts
+/src
+/backups
+/.specstory
+/test-server.js
+tsconfig.json
+
+# Documentation and handoff files
+HANDOFF-*.md
+STATUS-REPORT-*.md
+COMPLETION_SUMMARY.md
+NEW_FEATURES.md
+NEXT-SESSION-CONTEXT.md
+TESTING.md
+MAINNET-*.md
+
+# IDE
+.vscode
+.idea
+.cursor*
+
+# Test files
+*.test.js
+*.test.ts
+__tests__
