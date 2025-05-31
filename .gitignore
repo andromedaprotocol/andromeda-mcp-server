@@ -97,12 +97,16 @@ src/index-*.ts
 
 # Test files (if any)
 test-server.js
-# Handoff and Summary Files
+
+# Handoff and Summary Files (keep local only)
 COMPLETION_SUMMARY.md
+HANDOFF-*.md
 MAINNET-HANDOFF-20250530.md
 MAINNET-HANDOFF-SESSION2-20250530.md
 NEXT-SESSION-CONTEXT.md
-# Status and Troubleshooting Reports
+
+# Status and Troubleshooting Reports (keep local only)
+STATUS-REPORT-*.md
 STATUS-REPORT-20250530-PRE-TIER1.md
 STATUS-REPORT-20250530-TIER1-COMPLETE.md
 2025-05-28_17-39-git-init-error-troubleshooting.md
