@@ -386,7 +386,7 @@ class AndromedaMCPServer {
 
     return SigningCosmWasmClient.connectWithSigner(ANDROMEDA_RPC_ENDPOINT, wallet, {
       gasPrice: DEFAULT_GAS_PRICE,
-      gasAdjustment: 1.6,  // Increase gas estimation by 60%
+      // Note: gasAdjustment is handled in individual transaction methods
     });
   }
 
@@ -548,8 +548,7 @@ class AndromedaMCPServer {
     try {
       // Get the latest block height first
       const latestBlock = await this.cosmosClient.getBlock();
-      const latestHeight = parseInt(latestBlock.header.height);
-
+      const latestHeight = parseInt(latestBlock.header.height.toString());
 
       const allTransactions: any[] = [];
       let currentHeight = latestHeight;
@@ -559,7 +558,6 @@ class AndromedaMCPServer {
         try {
           const block = await this.cosmosClient.getBlock(currentHeight);
           const rawTxs = block.txs || [];
-
 
           // Parse the transactions to extract readable data
           const parsedTxs = rawTxs.map((tx, index) => {
@@ -595,7 +593,6 @@ class AndromedaMCPServer {
           continue;
         }
       }
-
 
       // Return the most recent transactions up to the limit
       return allTransactions.slice(0, limit);
