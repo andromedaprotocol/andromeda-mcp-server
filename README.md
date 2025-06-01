@@ -1,10 +1,16 @@
 # 🚀 Andromeda MCP Server - Production Ready ADO Ecosystem
 
-## �� Version 2.0.0 - **46/50 Tools Operational**
+##  Version 2.0.0 - **46/50 Tools Operational**
 
 The **Andromeda MCP Server** provides comprehensive blockchain operations for the Andromeda Protocol, delivering a production-ready **ADO (Andromeda Digital Objects)** ecosystem with **46 out of 50 tools** fully operational.
 
-This MCP server connects to any MCP-compatible agent framework, transforming the way developers build on blockchain. Here's how it works: you brainstorm business ideas with your AI agent, and together you'll design the perfect stack of 'ADOs' - to power your blockchain backend. Then, with a few simple commands, the server deploys and tests everything for you. It's like having a blockchain architect and DevOps engineer built right into your AI assistant.
+This MCP server connects to any MCP-compatible agent framework, transforming the way developers build on blockchain. 
+
+#### Here's how it works: 
+- Brainstorm business ideas with your AI agent; together you'll design the perfect stack of 'ADOs' - to power your blockchain backend. 
+- Then, with a few simple commands, the server deploys and tests everything for you. 
+  
+
 ![Server Status](https://img.shields.io/badge/Status-Production%20Ready-green)
 ![Tools Working](https://img.shields.io/badge/Tools-46%2F50-yellow)
 ![Network](https://img.shields.io/badge/Network-testnet%20ready-blue)
