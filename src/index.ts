@@ -25,6 +25,27 @@ import { z } from 'zod';
 // It converts BigInt values to strings before serialization.
 (BigInt.prototype as any).toJSON = function () { return this.toString(); };
 
+// ============================================================================
+// ANDROMEDA VIRTUAL TECHNICAL CO-FOUNDER
+// ============================================================================
+
+/**
+ * ANDROMEDA VIRTUAL TECHNICAL CO-FOUNDER
+ * 
+ * This server presents as a virtual technical co-founder specializing in rapid business 
+ * infrastructure deployment using Andromeda Digital Objects (ADOs).
+ * 
+ * The complete master prompt defining the co-founder's role, methodology, and interaction
+ * patterns is configured in the MCP client configuration files (mcp.json or 
+ * claude_desktop_config.json) under the "masterPrompt" field.
+ * 
+ * For the full prompt specification, see: MASTER-PROMPT.md
+ */
+
+// ============================================================================
+// NETWORK CONFIGURATION SYSTEM - MAINNET READY
+// ============================================================================
+
 // Network Configuration System - MAINNET READY
 interface NetworkConfig {
   chainId: string;
@@ -1972,6 +1993,36 @@ const server = new Server(
   {
     name: 'andromeda-mcp-server-testnet',
     version: '1.7.0',
+    description: `Andromeda Virtual Technical Co-Founder
+
+🤝 **Your Role**: Virtual technical co-founder specializing in rapid business infrastructure deployment using Andromeda Digital Objects (ADOs).
+
+🎯 **Partnership Mission**: Transform business ideas into deployed, production-ready infrastructure using systematic ADO composition - delivering what typically takes months of development and multiple technical hires in a matter of hours.
+
+⚡ **Core Partnership Value**: Strategic technical guidance + systematic deployment + business validation
+
+🛠️ **Technical Toolkit**:
+• **Core Infrastructure**: CW20 (tokens), CW721 (NFTs), Splitter (revenue distribution), Marketplace, Auction
+• **DeFi & Financial**: CW20-Staking, CW20-Exchange, Merkle-Airdrop, Multi-sig
+• **Advanced**: App (orchestration), Address-List (access control), Conditional-Splitter, Timelock
+
+🏗️ **Co-Founder Architectures**:
+• SaaS with Tokenized Subscriptions (CW20 + CW721 + Staking + Exchange)
+• NFT Creator Platforms (CW721 + Marketplace + Auction + Revenue sharing)  
+• Supply Chain SaaS (Product certificates + Verification rewards + Trading)
+• DeFi Protocols (Lending + Yield farming + Liquidity pools)
+• Token Economies (Governance + Staking + Exchange + Community rewards)
+
+🚀 **Strategic Deployment Approach**:
+1. **Foundation Layer** → Company infrastructure (tokens & NFTs)
+2. **Financial Layer** → Business operations (splitters, staking, exchanges)  
+3. **Application Layer** → Customer-facing products (marketplaces, auctions)
+4. **Business Validation** → End-to-end workflow testing
+
+💼 **Partnership Benefits**: 
+⚡ Speed (hours vs months) • 💰 Cost efficiency (fraction of technical team) • 🔍 Transparency (immutable business logic) • 🔧 Composability (proven components) • 🏗️ Production-ready • 🚀 Scalable architecture
+
+Ready to be your technical co-founder and build the infrastructure that enables your business vision.`
   },
   {
     capabilities: {
