@@ -1388,30 +1388,20 @@ FORMAT 5 (app-contract): ${error5.message}`);
   ): Promise<any> {
     const senderAddress = await this.getWalletAddress(mnemonic);
 
-    // Create safe extension object with only the required publisher field
-    // Remove custom fields that may cause "unknown field" errors like carbon_footprint
+    // **HARDCODED SAFE EXTENSION** - Andromeda expects URI to point to metadata
+    // Only use the required publisher field, ignore any custom extension fields
     const safeExtension = {
       publisher: senderAddress
     };
 
-    // Add any user extension fields that are known to be safe
-    if (extension && typeof extension === 'object') {
-      // Only add known safe fields - avoid experimental ones that cause failures
-      const safeFields = ['image', 'description', 'attributes', 'animation_url', 'external_url'];
-      for (const field of safeFields) {
-        if (extension[field] !== undefined) {
-          safeExtension[field] = extension[field];
-        }
-      }
-      console.error(`DEBUG: CW721 mint using safe extension fields only`);
-    }
+    console.error(`DEBUG: CW721 mint using hardcoded safe extension (publisher only)`);
 
     const msg = {
       mint: {
         token_id: tokenId,
         owner,
         token_uri: tokenUri,
-        extension: safeExtension  // Safe extension object with required publisher field
+        extension: safeExtension  // Always use safe extension with only publisher field
       }
     };
 
@@ -2597,11 +2587,11 @@ const tools: Tool[] = [
         },
         tokenUri: {
           type: 'string',
-          description: 'Token metadata URI',
+          description: 'Token metadata URI (should point to JSON metadata)',
         },
         extension: {
           type: 'object',
-          description: 'Extension metadata',
+          description: 'Extension metadata (IGNORED - safe extension used automatically)',
         },
       },
       required: ['contractAddress', 'tokenId', 'owner', 'mnemonic'],
