@@ -3247,8 +3247,13 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
 
       case 'execute_ado': {
         const parsed = ADOExecuteSchema.parse(args);
-        const { contractAddress, msg, mnemonic, funds = [], gas } = parsed;
-        const result = await andromedaServer.executeADO(contractAddress, msg, mnemonic, funds, gas);
+        const { contractAddress, msg, mnemonic, funds, gas } = parsed;
+        // Ensure funds has proper type by providing default with correct structure
+        const validFunds: Array<{ denom: string; amount: string }> = funds ?
+          funds.filter((f): f is { denom: string; amount: string } =>
+            typeof f.denom === 'string' && typeof f.amount === 'string'
+          ) : [];
+        const result = await andromedaServer.executeADO(contractAddress, msg, mnemonic, validFunds, gas);
         return {
           content: [
             {
@@ -3434,7 +3439,9 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
       case 'create_app': {
         const parsed = CreateAppSchema.parse(args);
         const { name, components, mnemonic } = parsed;
-        const result = await andromedaServer.createApp(name, components, mnemonic);
+        // Type assertion to ensure components match expected interface
+        const validComponents = components as Array<{ name: string; ado_type: string; instantiate_msg: any }>;
+        const result = await andromedaServer.createApp(name, validComponents, mnemonic);
         return {
           content: [
             {
@@ -3593,7 +3600,9 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
       case 'marketplace_list_item': {
         const parsed = MarketplaceListSchema.parse(args);
         const { marketplaceAddress, nftContract, tokenId, price, mnemonic } = parsed;
-        const result = await andromedaServer.marketplaceListItem(marketplaceAddress, nftContract, tokenId, price, mnemonic);
+        // Type assertion to ensure price matches expected interface
+        const validPrice = price as { amount: string; denom: string };
+        const result = await andromedaServer.marketplaceListItem(marketplaceAddress, nftContract, tokenId, validPrice, mnemonic);
         return {
           content: [
             {
@@ -3620,7 +3629,9 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
       case 'splitter_update_recipients': {
         const parsed = SplitterUpdateSchema.parse(args);
         const { splitterAddress, recipients, mnemonic } = parsed;
-        const result = await andromedaServer.splitterUpdateRecipients(splitterAddress, recipients, mnemonic);
+        // Type assertion to ensure recipients match expected interface
+        const validRecipients = recipients as Array<{ address: string; percent: string }>;
+        const result = await andromedaServer.splitterUpdateRecipients(splitterAddress, validRecipients, mnemonic);
         return {
           content: [
             {
@@ -3648,7 +3659,9 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
       case 'start_cw20_sale': {
         const parsed = StartCW20SaleSchema.parse(args);
         const { exchangeAddress, tokenAddress, amount, asset, exchangeRate, mnemonic, recipient, startTime, duration } = parsed;
-        const result = await andromedaServer.startCW20Sale(exchangeAddress, tokenAddress, amount, asset, exchangeRate, mnemonic, recipient, startTime, duration);
+        // Type assertion to ensure asset matches expected interface
+        const validAsset = asset as { type: 'native' | 'cw20'; value: string };
+        const result = await andromedaServer.startCW20Sale(exchangeAddress, tokenAddress, amount, validAsset, exchangeRate, mnemonic, recipient, startTime, duration);
         return {
           content: [
             {
@@ -3662,7 +3675,9 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
       case 'purchase_cw20_tokens': {
         const parsed = PurchaseCW20TokensSchema.parse(args);
         const { exchangeAddress, purchaseAsset, mnemonic, recipient } = parsed;
-        const result = await andromedaServer.purchaseCW20Tokens(exchangeAddress, purchaseAsset, mnemonic, recipient);
+        // Type assertion to ensure purchaseAsset matches expected interface
+        const validPurchaseAsset = purchaseAsset as { type: 'native' | 'cw20'; address: string; amount: string; denom: string };
+        const result = await andromedaServer.purchaseCW20Tokens(exchangeAddress, validPurchaseAsset, mnemonic, recipient);
         return {
           content: [
             {
@@ -3676,7 +3691,9 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
       case 'cancel_cw20_sale': {
         const parsed = CancelCW20SaleSchema.parse(args);
         const { exchangeAddress, asset, mnemonic } = parsed;
-        const result = await andromedaServer.cancelCW20Sale(exchangeAddress, asset, mnemonic);
+        // Type assertion to ensure asset matches expected interface
+        const validAsset = asset as { type: 'native' | 'cw20'; value: string };
+        const result = await andromedaServer.cancelCW20Sale(exchangeAddress, validAsset, mnemonic);
         return {
           content: [
             {
@@ -3690,7 +3707,9 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
       case 'query_cw20_sale': {
         const parsed = QueryCW20SaleSchema.parse(args);
         const { exchangeAddress, asset } = parsed;
-        const result = await andromedaServer.queryCW20Sale(exchangeAddress, asset);
+        // Type assertion to ensure asset matches expected interface
+        const validAsset = asset as { type: 'native' | 'cw20'; value: string };
+        const result = await andromedaServer.queryCW20Sale(exchangeAddress, validAsset);
         return {
           content: [
             {
@@ -3811,7 +3830,9 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
       case 'deploy_merkle_airdrop': {
         const parsed = DeployMerkleAirdropSchema.parse(args);
         const { name, asset, merkleRoot, totalAmount, mnemonic, startTime, endTime } = parsed;
-        const result = await andromedaServer.deployMerkleAirdrop(name, asset, merkleRoot, totalAmount, mnemonic, startTime, endTime);
+        // Type assertion to ensure asset matches expected interface
+        const validAsset = asset as { type: 'native' | 'cw20'; value: string };
+        const result = await andromedaServer.deployMerkleAirdrop(name, validAsset, merkleRoot, totalAmount, mnemonic, startTime, endTime);
         return {
           content: [
             {

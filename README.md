@@ -1,6 +1,34 @@
 # 🚀 Andromeda MCP Server - Production Ready ADO Ecosystem
 
-##  Version 2.0.0 - **46/50 Tools Operational**
+## 📦 Quick Start - NPM Installation
+
+```bash
+# Install globally
+npm install -g @myronkoch/andromeda-mcp-server
+
+# Or run directly with npx
+npx @myronkoch/andromeda-mcp-server
+
+# Or use in an MCP client configuration
+```
+
+### Claude Desktop Configuration
+Add to your `claude_desktop_config.json`:
+```json
+{
+  "mcpServers": {
+    "andromeda": {
+      "command": "npx",
+      "args": ["@myronkoch/andromeda-mcp-server"],
+      "env": {
+        "ANDROMEDA_NETWORK": "testnet"
+      }
+    }
+  }
+}
+```
+
+##  Version 1.7.0 - **46/50 Tools Operational**
 
 The **Andromeda MCP Server** provides comprehensive blockchain operations for the Andromeda Protocol, delivering a production-ready **ADO (Andromeda Digital Objects)** ecosystem with **46 out of 50 tools** fully operational.
 
@@ -14,6 +42,46 @@ This MCP server connects to any MCP-compatible agent framework, transforming the
 ![Server Status](https://img.shields.io/badge/Status-Production%20Ready-green)
 ![Tools Working](https://img.shields.io/badge/Tools-46%2F50-yellow)
 ![Network](https://img.shields.io/badge/Network-testnet%20ready-blue)
+![NPM Version](https://img.shields.io/npm/v/@myronkoch/andromeda-mcp-server)
+
+## 🔧 Installation & Usage
+
+### Installation Options
+
+1. **Global Installation (Recommended)**
+   ```bash
+   npm install -g @myronkoch/andromeda-mcp-server
+   andromeda-mcp-server
+   ```
+
+2. **NPX (No Installation Required)**
+   ```bash
+   npx @myronkoch/andromeda-mcp-server
+   ```
+
+3. **Local Project Installation**
+   ```bash
+   npm install @myronkoch/andromeda-mcp-server
+   npx andromeda-mcp-server
+   ```
+
+### Network Configuration
+```bash
+# Testnet (default)
+ANDROMEDA_NETWORK=testnet npx @myronkoch/andromeda-mcp-server
+
+# Mainnet (configuration needed)
+ANDROMEDA_NETWORK=mainnet npx @myronkoch/andromeda-mcp-server
+```
+
+### Development Mode
+```bash
+# Clone repository for development
+git clone https://github.com/myronkoch/andromeda-mcp-server.git
+cd andromeda-mcp-server
+npm install
+npm run start:dev:testnet
+```
 
 ## 🚧 **Outstanding Issues for Team Collaboration**
 
