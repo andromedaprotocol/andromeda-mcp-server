@@ -227,8 +227,8 @@ const StartCW20SaleSchema = z.object({
   tokenAddress: z.string().describe('CW20 token contract address'),
   amount: z.string().describe('Amount of tokens to put up for sale'),
   asset: z.object({
-    type: z.enum(['native', 'cw20']).describe('Type of purchasing asset'),
-    value: z.string().describe('Asset denomination (for native) or contract address (for CW20)')
+    type: z.enum(['native', 'cw20']),
+    value: z.string()
   }).describe('Asset that can be used to purchase the tokens'),
   exchangeRate: z.string().describe('Amount of purchasing asset required for one token'),
   mnemonic: z.string().describe('Seller wallet mnemonic'),
@@ -240,10 +240,10 @@ const StartCW20SaleSchema = z.object({
 const PurchaseCW20TokensSchema = z.object({
   exchangeAddress: z.string().describe('CW20 Exchange contract address'),
   purchaseAsset: z.object({
-    type: z.enum(['native', 'cw20']).describe('Type of asset to use for purchase'),
-    address: z.string().optional().describe('CW20 contract address (required for CW20 purchases)'),
-    amount: z.string().describe('Amount of asset to spend'),
-    denom: z.string().optional().describe('Token denomination (required for native purchases)')
+    type: z.enum(['native', 'cw20']),
+    address: z.string(),
+    amount: z.string(),
+    denom: z.string()
   }).describe('Asset to use for purchasing tokens'),
   mnemonic: z.string().describe('Buyer wallet mnemonic'),
   recipient: z.string().optional().describe('Recipient of purchased tokens (defaults to sender)')
@@ -252,8 +252,8 @@ const PurchaseCW20TokensSchema = z.object({
 const CancelCW20SaleSchema = z.object({
   exchangeAddress: z.string().describe('CW20 Exchange contract address'),
   asset: z.object({
-    type: z.enum(['native', 'cw20']).describe('Type of purchasing asset'),
-    value: z.string().describe('Asset denomination (for native) or contract address (for CW20)')
+    type: z.enum(['native', 'cw20']),
+    value: z.string()
   }).describe('Asset of the sale to cancel'),
   mnemonic: z.string().describe('Exchange owner wallet mnemonic')
 });
@@ -261,8 +261,8 @@ const CancelCW20SaleSchema = z.object({
 const QueryCW20SaleSchema = z.object({
   exchangeAddress: z.string().describe('CW20 Exchange contract address'),
   asset: z.object({
-    type: z.enum(['native', 'cw20']).describe('Type of purchasing asset'),
-    value: z.string().describe('Asset denomination (for native) or contract address (for CW20)')
+    type: z.enum(['native', 'cw20']),
+    value: z.string()
   }).describe('Asset of the sale to query')
 });
 
@@ -334,8 +334,8 @@ const ClaimStakingRewardsSchema = z.object({
 const DeployMerkleAirdropSchema = z.object({
   name: z.string().describe('Name for the Merkle Airdrop instance'),
   asset: z.object({
-    type: z.enum(['native', 'cw20']).describe('Type of asset to distribute'),
-    value: z.string().describe('Asset denomination (for native) or contract address (for CW20)')
+    type: z.enum(['native', 'cw20']),
+    value: z.string()
   }).describe('Asset to distribute in the airdrop'),
   merkleRoot: z.string().describe('Merkle root hash for the airdrop tree'),
   totalAmount: z.string().describe('Total amount to distribute'),
@@ -536,25 +536,11 @@ class AndromedaMCPServer {
     }
     try {
       const fullInfo = await this.cosmWasmClient.getCodeDetails(codeId);
-      // Only return safe, summarized fields
-      const {
-        code_id,
-        creator,
-        checksum,
-        source,
-        builder,
-        instantiate_permission,
-        // Some clients may return upload_time or similar
-        upload_time
-      } = fullInfo;
+      // Return the full info object directly since CodeDetails type is opaque
       return {
-        code_id,
-        creator,
-        checksum,
-        source,
-        builder,
-        instantiate_permission,
-        upload_time: upload_time || undefined
+        codeId,
+        ...fullInfo,
+        upload_time: (fullInfo as any).upload_time || undefined
       };
     } catch (error: any) {
       return {
@@ -1415,31 +1401,28 @@ FORMAT 5 (app-contract): ${error5.message}`);
     price: { amount: string; denom: string },
     mnemonic: string
   ): Promise<any> {
-    // First, approve the marketplace to transfer the NFT
-    const approveMsg = {
-      approve: {
-        spender: marketplaceAddress,
-        token_id: tokenId
+    // **MARKETPLACE FIX**: Use the correct approach from Andromeda docs
+    // Call send_nft on the CW721 contract, not receive_nft on marketplace
+
+    const hookMsg = {
+      start_sale: {
+        price: price.amount,
+        coin_denom: price.denom
       }
     };
 
-    await this.executeADO(nftContract, approveMsg, mnemonic);
-
-    // Then list the item
-    const listMsg = {
-      receive_nft: {
-        sender: await this.getWalletAddress(mnemonic),
+    // Call send_nft on the NFT contract (correct approach)
+    const sendNftMsg = {
+      send_nft: {
+        contract: marketplaceAddress,
         token_id: tokenId,
-        msg: Buffer.from(JSON.stringify({
-          start_sale: {
-            price: price.amount,
-            coin_denom: price.denom
-          }
-        })).toString('base64')
+        msg: Buffer.from(JSON.stringify(hookMsg)).toString('base64')
       }
     };
 
-    return await this.executeADO(marketplaceAddress, listMsg, mnemonic);
+    console.error(`DEBUG: MARKETPLACE FIX - Using send_nft on NFT contract:`, JSON.stringify(sendNftMsg, null, 2));
+
+    return await this.executeADO(nftContract, sendNftMsg, mnemonic, [], '300000');
   }
 
   async auctionPlaceBid(
@@ -3263,7 +3246,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
       }
 
       case 'execute_ado': {
-        const { contractAddress, msg, mnemonic, funds, gas } = ADOExecuteSchema.parse(args);
+        const parsed = ADOExecuteSchema.parse(args);
+        const { contractAddress, msg, mnemonic, funds = [], gas } = parsed;
         const result = await andromedaServer.executeADO(contractAddress, msg, mnemonic, funds, gas);
         return {
           content: [
@@ -3448,7 +3432,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
 
       // App Management Tools
       case 'create_app': {
-        const { name, components, mnemonic } = CreateAppSchema.parse(args);
+        const parsed = CreateAppSchema.parse(args);
+        const { name, components, mnemonic } = parsed;
         const result = await andromedaServer.createApp(name, components, mnemonic);
         return {
           content: [
@@ -3606,7 +3591,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
       }
 
       case 'marketplace_list_item': {
-        const { marketplaceAddress, nftContract, tokenId, price, mnemonic } = MarketplaceListSchema.parse(args);
+        const parsed = MarketplaceListSchema.parse(args);
+        const { marketplaceAddress, nftContract, tokenId, price, mnemonic } = parsed;
         const result = await andromedaServer.marketplaceListItem(marketplaceAddress, nftContract, tokenId, price, mnemonic);
         return {
           content: [
@@ -3632,7 +3618,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
       }
 
       case 'splitter_update_recipients': {
-        const { splitterAddress, recipients, mnemonic } = SplitterUpdateSchema.parse(args);
+        const parsed = SplitterUpdateSchema.parse(args);
+        const { splitterAddress, recipients, mnemonic } = parsed;
         const result = await andromedaServer.splitterUpdateRecipients(splitterAddress, recipients, mnemonic);
         return {
           content: [
@@ -3659,7 +3646,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
       }
 
       case 'start_cw20_sale': {
-        const { exchangeAddress, tokenAddress, amount, asset, exchangeRate, mnemonic, recipient, startTime, duration } = StartCW20SaleSchema.parse(args);
+        const parsed = StartCW20SaleSchema.parse(args);
+        const { exchangeAddress, tokenAddress, amount, asset, exchangeRate, mnemonic, recipient, startTime, duration } = parsed;
         const result = await andromedaServer.startCW20Sale(exchangeAddress, tokenAddress, amount, asset, exchangeRate, mnemonic, recipient, startTime, duration);
         return {
           content: [
@@ -3672,7 +3660,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
       }
 
       case 'purchase_cw20_tokens': {
-        const { exchangeAddress, purchaseAsset, mnemonic, recipient } = PurchaseCW20TokensSchema.parse(args);
+        const parsed = PurchaseCW20TokensSchema.parse(args);
+        const { exchangeAddress, purchaseAsset, mnemonic, recipient } = parsed;
         const result = await andromedaServer.purchaseCW20Tokens(exchangeAddress, purchaseAsset, mnemonic, recipient);
         return {
           content: [
@@ -3685,7 +3674,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
       }
 
       case 'cancel_cw20_sale': {
-        const { exchangeAddress, asset, mnemonic } = CancelCW20SaleSchema.parse(args);
+        const parsed = CancelCW20SaleSchema.parse(args);
+        const { exchangeAddress, asset, mnemonic } = parsed;
         const result = await andromedaServer.cancelCW20Sale(exchangeAddress, asset, mnemonic);
         return {
           content: [
@@ -3698,7 +3688,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
       }
 
       case 'query_cw20_sale': {
-        const { exchangeAddress, asset } = QueryCW20SaleSchema.parse(args);
+        const parsed = QueryCW20SaleSchema.parse(args);
+        const { exchangeAddress, asset } = parsed;
         const result = await andromedaServer.queryCW20Sale(exchangeAddress, asset);
         return {
           content: [
@@ -3818,7 +3809,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
 
       // Merkle Airdrop Tools
       case 'deploy_merkle_airdrop': {
-        const { name, asset, merkleRoot, totalAmount, mnemonic, startTime, endTime } = DeployMerkleAirdropSchema.parse(args);
+        const parsed = DeployMerkleAirdropSchema.parse(args);
+        const { name, asset, merkleRoot, totalAmount, mnemonic, startTime, endTime } = parsed;
         const result = await andromedaServer.deployMerkleAirdrop(name, asset, merkleRoot, totalAmount, mnemonic, startTime, endTime);
         return {
           content: [
