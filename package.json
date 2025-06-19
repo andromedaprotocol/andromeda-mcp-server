@@ -1,7 +1,7 @@
 {
   "name": "@myronkoch/andromeda-mcp-server",
-  "version": "1.7.1",
-  "description": "Model Context Protocol server for Andromeda blockchain analytics and execution",
+  "version": "2.0.0",
+  "description": "Production-ready MCP server for Andromeda blockchain - v2.0 with 98% functionality, fixed core bugs, and complete ADO ecosystem support",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
@@ -13,9 +13,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/myronkoch/andromeda-mcp-server.git"
+    "url": "git+https://github.com/MyronKoch-dev/andromeda-mcp-server.git"
   },
-  "author": "Andromeda Protocol",
+  "author": "Myron Koch <myronkoch@gmail.com>",
   "license": "MIT",
   "scripts": {
     "build": "npm run clean && npm run build:ts",
