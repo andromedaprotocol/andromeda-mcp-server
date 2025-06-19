@@ -111,3 +111,12 @@ STATUS-REPORT-20250530-PRE-TIER1.md
 STATUS-REPORT-20250530-TIER1-COMPLETE.md
 2025-05-28_17-39-git-init-error-troubleshooting.md
 .specstory/history
+
+# Archive folder
+archive/
+
+# New additions
+debug-mnemonic.js
+index-original.ts
+server-before-debug.ts
+claude.md
