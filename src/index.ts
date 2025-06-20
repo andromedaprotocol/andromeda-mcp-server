@@ -20,7 +20,7 @@ const server = new Server(
   {
     name: 'andromeda-mcp-queries',
     version: '1.0.0',
-    description: 'Andromeda MCP Server - Queries Package: 16 read-only tools for safe blockchain exploration'
+    description: 'Andromeda MCP Server - Queries Package: 14 read-only tools for safe blockchain exploration'
   },
   {
     capabilities: {
@@ -171,21 +171,6 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
 
       case 'query_airdrop_claim': {
         const result = await andromedaServer.queryAirdropClaim(args?.airdropAddress as string, args?.address as string);
-        return {
-          content: [{ type: 'text', text: JSON.stringify(result, null, 2) }],
-        };
-      }
-
-      // Advanced Monitoring (2 tools)
-      case 'graphql_query': {
-        const result = await andromedaServer.graphqlQuery(args?.query as string, args?.variables as any);
-        return {
-          content: [{ type: 'text', text: JSON.stringify(result, null, 2) }],
-        };
-      }
-
-      case 'subscribe_ado_events': {
-        const result = await andromedaServer.subscribeADOEvents(args?.contractAddress as string);
         return {
           content: [{ type: 'text', text: JSON.stringify(result, null, 2) }],
         };

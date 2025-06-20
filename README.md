@@ -1,12 +1,12 @@
 # Andromeda MCP Server - Queries Package
 
-**Package 1 of 3** | **16 Read-Only Tools** | **Safe Exploration**
+**Package 1 of 3** | **14 Read-Only Tools** | **Safe Exploration**
 
 🔍 **COMPREHENSIVE BLOCKCHAIN DISCOVERY** without transaction risk.
 
 ## 🎯 Overview
 
-The Andromeda MCP Queries Package provides **16 powerful read-only tools** for comprehensive Andromeda blockchain exploration, monitoring, and discovery. Perfect for developers, analysts, and researchers who need deep blockchain insights without transaction capabilities.
+The Andromeda MCP Queries Package provides **14 powerful read-only tools** for comprehensive Andromeda blockchain exploration, monitoring, and discovery. Perfect for developers, analysts, and researchers who need deep blockchain insights without transaction capabilities.
 
 ## ✨ Key Features
 
@@ -99,8 +99,8 @@ Add to your MCP configuration file (`claude_desktop_config.json`):
 
 | Tool | Description |
 |------|-------------|
-| `graphql_query` | Execute GraphQL queries against Andromeda indexer |
-| `subscribe_ado_events` | Monitor real-time ADO events via GraphQL |
+| `query_cw20_sale` | Query information about a CW20 sale on an exchange |
+| `query_airdrop_claim` | Query airdrop claim status for an address |
 
 ## 🔍 Example Usage
 
@@ -228,7 +228,7 @@ npm run build
 
 This is **Package 1** of our 3-package rollout strategy:
 
-- ✅ **Package 1 (This)**: 16 query-only tools for safe exploration
+- ✅ **Package 1 (This)**: 14 query-only tools for safe exploration
 - ⏳ **Package 2**: Execution capabilities (~25 tools)
 - ⏳ **Package 3**: Complete ecosystem (50 tools)
 

@@ -269,37 +269,4 @@ export const tools: Tool[] = [
     },
   },
 
-  // Advanced Monitoring (2 tools)
-  {
-    name: 'graphql_query',
-    description: 'Execute GraphQL queries against Andromeda indexer',
-    inputSchema: {
-      type: 'object',
-      properties: {
-        query: {
-          type: 'string',
-          description: 'GraphQL query string',
-        },
-        variables: {
-          type: 'object',
-          description: 'GraphQL variables',
-        },
-      },
-      required: ['query'],
-    },
-  },
-  {
-    name: 'subscribe_ado_events',
-    description: 'Subscribe to real-time ADO events (queries recent events via GraphQL)',
-    inputSchema: {
-      type: 'object',
-      properties: {
-        contractAddress: {
-          type: 'string',
-          description: 'ADO contract address to monitor events for',
-        },
-      },
-      required: ['contractAddress'],
-    },
-  },
 ];
