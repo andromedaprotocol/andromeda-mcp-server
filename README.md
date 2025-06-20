@@ -102,6 +102,74 @@ Add to your MCP configuration file (`claude_desktop_config.json`):
 | `query_cw20_sale` | Query information about a CW20 sale on an exchange |
 | `query_airdrop_claim` | Query airdrop claim status for an address |
 
+## 🚀 Sample Prompts - Get Started Immediately!
+
+Once installed, try these powerful prompts to explore Andromeda's capabilities:
+
+### 🔍 **Blockchain Discovery**
+```
+Get the current state of the Andromeda blockchain - what's the latest block and chain info?
+```
+
+```
+Show me the balance and account details for andr1akrkuta856eth47567hk2nrknfpjdwtgxjxt8v
+```
+
+```
+Who are the active validators on Andromeda and what's their status?
+```
+
+### 📊 **ADO Ecosystem Exploration**
+```
+What ADO types are available in the Andromeda ecosystem? Show me all the building blocks I can use.
+```
+
+```
+Get the code ID for the latest CW20 token ADO and show me all available versions.
+```
+
+```
+Find all deployed contracts that use CW20 code ID 10 - show me the ecosystem of tokens.
+```
+
+### 🏗 **Smart Contract Analysis**
+```
+Query this Board Demo Token contract andr1wdfe5qqyq36mm7sqypcxnme2m47xtfgv7y8v7rtstxdxsj82rrtq7rrdzn and tell me its token info, total supply, and any other details.
+```
+
+```
+Analyze this App contract andr1wummgmrf39p2hg90yxn0uh3tvc630kez4e9ymz8ujny6zeklkxkq008jns - what components does it contain and how is it structured?
+```
+
+### 🕵️ **Transaction Forensics**
+```
+Investigate this transaction 524AB9BE8429A4DEF0ECD3986C46C73BE32F4CE573BF44490DA42AA8EBFD5473 - what happened, who was involved, and what were the results?
+```
+
+### 💼 **Business Intelligence**
+```
+I'm thinking of building a DeFi application. Show me what CW20 staking and exchange ADOs are available, their versions, and get me the code IDs I'd need.
+```
+
+```
+Help me understand Andromeda Apps - find an example App and break down its architecture and components.
+```
+
+### 🎯 **Developer Workflows**
+```
+I want to deploy a marketplace. Show me the latest marketplace ADO code ID, find some example marketplace contracts, and query one to see how it's configured.
+```
+
+```
+Walk me through the complete tokenomics landscape on Andromeda - what token ADOs exist, show me some live examples, and analyze their configurations.
+```
+
+**💡 Pro Tips:**
+- Ask follow-up questions! Each query opens up new exploration paths
+- Combine multiple tools in one prompt for comprehensive analysis
+- Request analysis: "What does this contract data tell us about the project?"
+- Use real addresses for concrete results (examples provided above)
+
 ## 🔍 Example Usage
 
 ### Basic Chain Exploration

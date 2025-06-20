@@ -1,6 +1,6 @@
 {
   "name": "@myronkoch/andromeda-mcp-queries",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Andromeda MCP Server - Queries Package: 14 read-only tools for safe Andromeda blockchain exploration and discovery",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
