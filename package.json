@@ -1,11 +1,11 @@
 {
-  "name": "@myronkoch/andromeda-mcp-server",
-  "version": "2.1.0",
-  "description": "Production-ready MCP server for Andromeda blockchain - v2.0 with 98% functionality, fixed core bugs, and complete ADO ecosystem support",
+  "name": "@andromedaprotocol/andromeda-mcp-queries",
+  "version": "1.0.0",
+  "description": "Andromeda MCP Server - Queries Package: 16 read-only tools for safe Andromeda blockchain exploration and discovery",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
-    "andromeda-mcp-server": "bin/andromeda-mcp-server.js"
+    "andromeda-mcp-queries": "bin/andromeda-mcp-server.js"
   },
   "private": false,
   "publishConfig": {
@@ -13,7 +13,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MyronKoch-dev/andromeda-mcp-server.git"
+    "url": "git+https://github.com/andromedaprotocol/Andromeda-MCP-Server.git",
+    "directory": "package-1-queries"
   },
   "author": "Myron Koch <myronkoch@gmail.com>",
   "license": "MIT",
@@ -28,7 +29,7 @@
     "start:dev:mainnet": "ANDROMEDA_NETWORK=mainnet tsx src/index.ts",
     "start:dev:testnet": "ANDROMEDA_NETWORK=testnet tsx src/index.ts",
     "prepublishOnly": "npm run build",
-    "test": "echo 'Tests run on production infrastructure' && exit 0",
+    "test": "echo 'Testing query tools on production infrastructure' && npm run start:testnet",
     "clean": "rm -rf dist",
     "prepare": "npm run build",
     "typecheck": "tsc --noEmit"
@@ -38,16 +39,15 @@
     "andromeda",
     "cosmos",
     "blockchain",
+    "queries",
     "analytics",
     "ado",
-    "execution",
-    "npx",
-    "cli",
+    "read-only",
+    "exploration",
+    "discovery",
     "model-context-protocol",
     "smart-contracts",
-    "defi",
-    "nft",
-    "web3"
+    "monitoring"
   ],
   "engines": {
     "node": ">=18.0.0"
