@@ -283,7 +283,7 @@ npm run build
 
 This is **Package 1** of our 3-package rollout strategy:
 
-- ✅ **Package 1 (This)**: 12 query-only tools for safe exploration
+- ✅ **Package 1 (This)**: 16 query-only tools for safe exploration
 - ⏳ **Package 2**: Execution capabilities (~25 tools)
 - ⏳ **Package 3**: Complete ecosystem (50 tools)
 
