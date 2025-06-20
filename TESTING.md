@@ -805,9 +805,9 @@ create_app({
 })
 // Expected: Unauthorized
 
-// App query on non-existent
-get_app_info({
-  appAddress: "..."
+// Database lookup on non-existent
+query_adodb({
+  adoType: "invalid-ado-type"
 })
 // Expected: Not found
 ```

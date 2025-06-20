@@ -198,35 +198,6 @@ export const tools: Tool[] = [
     },
   },
 
-  // App Information Queries (2 tools)
-  {
-    name: 'get_app_info',
-    description: 'Query information about deployed Apps',
-    inputSchema: {
-      type: 'object',
-      properties: {
-        appAddress: {
-          type: 'string',
-          description: 'App contract address',
-        },
-      },
-      required: ['appAddress'],
-    },
-  },  {
-    name: 'list_app_components',
-    description: 'List all ADOs within an App',
-    inputSchema: {
-      type: 'object',
-      properties: {
-        appAddress: {
-          type: 'string',
-          description: 'App contract address',
-        },
-      },
-      required: ['appAddress'],
-    },
-  },
-
   // Exchange & Airdrop Status Queries (2 tools)
   {
     name: 'query_cw20_sale',

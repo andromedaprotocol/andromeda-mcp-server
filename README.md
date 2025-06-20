@@ -1,12 +1,12 @@
 # Andromeda MCP Server - Queries Package
 
-**Package 1 of 3** | **14 Read-Only Tools** | **Safe Exploration**
+**Package 1 of 3** | **12 Read-Only Tools** | **Safe Exploration**
 
 🔍 **COMPREHENSIVE BLOCKCHAIN DISCOVERY** without transaction risk.
 
 ## 🎯 Overview
 
-The Andromeda MCP Queries Package provides **14 powerful read-only tools** for comprehensive Andromeda blockchain exploration, monitoring, and discovery. Perfect for developers, analysts, and researchers who need deep blockchain insights without transaction capabilities.
+The Andromeda MCP Queries Package provides **12 powerful read-only tools** for comprehensive Andromeda blockchain exploration, monitoring, and discovery. Perfect for developers, analysts, and researchers who need deep blockchain insights without transaction capabilities.
 
 ## ✨ Key Features
 
@@ -19,8 +19,7 @@ The Andromeda MCP Queries Package provides **14 powerful read-only tools** for c
 - **Blockchain Infrastructure**: Chain info, blocks, accounts, validators
 - **Contract Discovery**: ADO queries, contract inspection, code analysis  
 - **ADO Database**: Type discovery, version management, code resolution
-- **App Inspection**: Component analysis for deployed Andromeda Apps
-- **Advanced Monitoring**: GraphQL integration and real-time events
+- **Status Monitoring**: Exchange queries and airdrop claim status
 
 ### ⚡ **Production Ready**
 - Built on **98% functional** Andromeda MCP infrastructure
@@ -88,14 +87,7 @@ Add to your MCP configuration file (`claude_desktop_config.json`):
 | `get_ado_code_id` | Get code ID for specific ADO type and version |
 | `list_ado_versions` | List all versions of a specific ADO type |
 
-### 🏗 App Information (2 tools)
-
-| Tool | Description |
-|------|-------------|
-| `get_app_info` | Query information about deployed Apps |
-| `list_app_components` | List all ADOs within an App |
-
-### 📈 Advanced Monitoring (2 tools)
+### 📈 **Status Queries (2 tools)**
 
 | Tool | Description |
 |------|-------------|
@@ -137,9 +129,6 @@ Find all deployed contracts that use CW20 code ID 10 - show me the ecosystem of 
 Query this Board Demo Token contract andr1wdfe5qqyq36mm7sqypcxnme2m47xtfgv7y8v7rtstxdxsj82rrtq7rrdzn and tell me its token info, total supply, and any other details.
 ```
 
-```
-Analyze this App contract andr1wummgmrf39p2hg90yxn0uh3tvc630kez4e9ymz8ujny6zeklkxkq008jns - what components does it contain and how is it structured?
-```
 
 ### 🕵️ **Transaction Forensics**
 ```
@@ -151,9 +140,6 @@ Investigate this transaction 524AB9BE8429A4DEF0ECD3986C46C73BE32F4CE573BF44490DA
 I'm thinking of building a DeFi application. Show me what CW20 staking and exchange ADOs are available, their versions, and get me the code IDs I'd need.
 ```
 
-```
-Help me understand Andromeda Apps - find an example App and break down its architecture and components.
-```
 
 ### 🎯 **Developer Workflows**
 ```
@@ -250,9 +236,8 @@ await subscribe_ado_events({
 - Code ID resolution for deployments
 
 ### 📈 **Business Intelligence**
-- App component analysis
 - Market data via exchange queries
-- Real-time event monitoring
+- Status monitoring and analytics
 
 ### 🎓 **Education & Research**
 - Safe blockchain exploration for learning
@@ -296,7 +281,7 @@ npm run build
 
 This is **Package 1** of our 3-package rollout strategy:
 
-- ✅ **Package 1 (This)**: 14 query-only tools for safe exploration
+- ✅ **Package 1 (This)**: 12 query-only tools for safe exploration
 - ⏳ **Package 2**: Execution capabilities (~25 tools)
 - ⏳ **Package 3**: Complete ecosystem (50 tools)
 
