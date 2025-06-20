@@ -707,9 +707,7 @@ FORMAT 5 (app-contract): ${error5.message}`);
 
   async listAppComponents(appAddress: string): Promise<any> {
     const query = {
-      get_components: {
-        names: null
-      }
+      get_components: {}
     };
 
     return await this.queryADO(appAddress, query);
