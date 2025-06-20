@@ -112,7 +112,7 @@ Get the current state of the Andromeda blockchain - what's the latest block and 
 ```
 
 ```
-Show me the balance and account details for andr1akrkuta856eth47567hk2nrknfpjdwtgxjxt8v
+Show me the balance and account details for andr16lj28n4claa3kkplxmr8mt5jue3973dgzujfmq
 ```
 
 ```
@@ -306,6 +306,22 @@ This is **Package 1** of our 3-package rollout strategy:
 - **Company**: Andromeda Protocol
 - **License**: MIT
 - **Issues**: GitHub Issues in main repository
+
+## 🔗 Demo Wallet & Test Assets
+
+**Demo Wallet**: `andr16lj28n4claa3kkplxmr8mt5jue3973dgzujfmq`
+- **ANDR Balance**: ~10 ANDR for transaction fees
+- **BDT Tokens**: 50,000 Board Demo Tokens  
+- **NFT**: DEMO_001 from Demo Collection NFTs
+- **Created**: Specifically for sample prompt testing
+
+**Associated Contracts**:
+- **Demo NFT Collection**: `andr1j6m8dplacngaagpd9vlxmj2xl0mt5lr7s56c92rfu2hk6e9rk88s5zaccf`
+- **Board Demo Token**: `andr1wdfe5qqyq36mm7sqypcxnme2m47xtfgv7y8v7rtstxdxsj82rrtq7rrdzn`
+- **App Contract**: `andr1wummgmrf39p2hg90yxn0uh3tvc630kez4e9ymz8ujny6zeklkxkq008jns`
+- **Sample Transaction**: `58CF8D0D5B406EF714E62578D73F56C8F1CD04BA31BE0E05939F19F7E4F02781`
+
+Perfect for copy-paste testing of all query tools with guaranteed interesting results!
 
 ## 📜 License
 
