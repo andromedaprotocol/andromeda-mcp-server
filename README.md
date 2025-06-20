@@ -1,12 +1,14 @@
-# Andromeda MCP Server - Queries Package
+# Andromeda MCP Server
 
-**Package 1 of 3** | **12 Read-Only Tools** | **Safe Exploration**
+**16 Read-Only Query Tools** | **Safe Blockchain Exploration**
 
 🔍 **COMPREHENSIVE BLOCKCHAIN DISCOVERY** without transaction risk.
 
+*The first MCP server in the Cosmos ecosystem, bringing Andromeda's complete ADO framework to AI agents.*
+
 ## 🎯 Overview
 
-The Andromeda MCP Queries Package provides **12 powerful read-only tools** for comprehensive Andromeda blockchain exploration, monitoring, and discovery. Perfect for developers, analysts, and researchers who need deep blockchain insights without transaction capabilities.
+The Andromeda MCP Server provides **16 powerful read-only tools** for comprehensive Andromeda blockchain exploration, monitoring, and discovery. Perfect for developers, analysts, and researchers who need deep blockchain insights without transaction capabilities.
 
 ## ✨ Key Features
 
